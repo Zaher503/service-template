@@ -1,0 +1,20 @@
+# Template service. Rename the service, image and port (scripts/new-service.sh does it for you).
+name: my-service
+
+services:
+  app:
+    image: ghcr.io/zaher503/my-service:${TAG:-latest}
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8800:8800"
+    networks:
+      - default
+      # Uncomment when the service needs the shared models (Ollama API and Whisper at http://ai-hub:11434)
+      # - ai
+
+# networks:
+#   ai:
+#     external: true
+#     name: ai
